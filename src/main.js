@@ -1,16 +1,62 @@
-var myMovie = document.getElementById('myMovie');
+var oneadVideo = document.getElementById('oneadVideo');
 var mutedButton= document.getElementById('mutedButton');
-var playButton = document.getElementById('playButton');
-var stopButton = document.getElementById('stopButton');
 var bar = document.querySelectorAll(".bar");
-var news = document.getElementById("news");
-var closebtn = document.getElementById("close-btn");
+var news = document.getElementById("banner_wrapper");
+// var scrollPlay = document.getElementById('playButton');
+var windosHeight = window.innerHeight;//抓視窗的高
+var oc = document.getElementById("onead_container");//宣告
+var inreadLayout = document.getElementById("inread_layout");
+var gsPlayer = document.getElementById('gsplayer');
+var bannerWarrper  = document.getElementById('banner_wrapper');
+var bbTop=oc.offsetTop;//抓物件的位子
+// var toptext = document.getElementById("top");//宣告
+// toptext.innerText=windosHeight;//高度帶入文字
+var all=0;//宣告一個全域變數
+window.onscroll=function (){ //也可以寫成 window.onscroll=()=>{} 箭頭函數XD 跟CSS的flex一樣有毒
+    var windowtop =window.scrollY;//宣告卷軸的高度
+     all = windowtop+windosHeight//卷軸滑動高度+一開始視窗高度 就是當前卷軸的高度
+    // toptext.innerText=all;//帶入高度
+    if(all >= bbTop&&all<= 1700){//如果總高度>=物件高 AND 總高度<=2000的時候 走這裡
+        inreadLayout.style.paddingBottom = "56.2%";
+        gsPlayer.style.transform = "translateX(-34%)";
+        bannerWarrper.style.transform = "scale(0.396094)";
+    }
+    else{//如果不是上面就是這裡
+        oneadVideo.play();
+        // inread_layout padding-bottom 56.25% ->140%
+        inreadLayout.style.paddingBottom = "140%";
+        // gsplayer transform(-34%)->transform(0%)
+        gsPlayer.style.transform = "translateX(0%)";
+        // bannerWarrper transform:scale(0.396094)->transform: scale(0.585938) translateY(358px);
+        bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
+    }
+}
+console.log("video.ended:"+Boolean(oneadVideo.ended));
+// var videoStop =true;
+
+//     videoStop = !videoStop;
+//     oneadVideo.ended = videoStop;
+// 	if(videoStop){
+//         oneadVideo.stop();
+//         inreadLayout.style.paddingBottom = "56.2%";
+//         gsPlayer.style.transform = "translateX(-34%)";
+//         bannerWarrper.style.transform = "scale(0.396094)";
+// 	}else{
+//         oneadVideo.play();
+//         // inread_layout padding-bottom 56.25% ->140%
+//         inreadLayout.style.paddingBottom = "140%";
+//         // gsplayer transform(-34%)->transform(0%)
+//         gsPlayer.style.transform = "translateX(0%)";
+//         // bannerWarrper transform:scale(0.396094)->transform: scale(0.585938) translateY(358px);
+//         bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
+//        }
+
+
 
 function init(){
-    myMovie.volume =0;
+    oneadVideo.volume =0;
 
     //先跟HTML畫面產生關連
-    document.getElementById("linkButton").onclick = linkNews;
     // mutedButton.onclick = muted;
     var time ;
     time = setInterval(()=>{
@@ -20,64 +66,28 @@ function init(){
             bar[i].style.height = num+"px";
         }
     },200)
-	
     //再建事件聆聽的功能
-    closebtn.addEventListener('click',closeNews);
     news.addEventListener('click',linkNews);
-    playButton.addEventListener('click',replayVideo);
-    myMovie.addEventListener('click',playVideo)
-	mutedButton.addEventListener('click',muted);
+    oneadVideo.addEventListener('click',playVideo)
+    mutedButton.addEventListener('click',muted);
+    // playButton.addEventListener('scroll',scrollPlay);
 }
 
+//點擊banner_warp跳到宣傳頁面
 
-console.log(Boolean(myMovie.paused));
+console.log(Boolean(oneadVideo.paused));
 //點擊跳至連結
 var aaa = false;
 function linkNews(e){
-    // window.open("https://www.onead.com.tw");
-    // myMovie.pause();
-    if(aaa){
-        aaa = false;
-        myMovie.play();
-        console.log("NoOpen",aaa);
-    }else if(!aaa){
-        console.log("open",aaa);
-        window.open("https://www.onead.com.tw");
-        myMovie.pause();
-        aaa = true;
-    }
-    console.log("最後",aaa);
-
+    window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
 }
 
 function playVideo(){
-    myMovie.play();
+    oneadVideo.play();
 }
 
+//調整靜音
 
-//關閉廣告的按鈕
-function closeNews(){
-     //終止預設行為
-    event.preventDefault();
-    //終止事件傳導
-    event.stopPropagation();
-    document.getElementById("onead-news").style.display = "none";
-    if(myMovie.volume !=0 ){
-		originVolume=myMovie.volume;
-		console.log('originVolume='+originVolume);
-		myMovie.volume=0;
-		console.log(myMovie.volume);
-	}else{
-		console.log(originVolume);
-		myMovie.volume=originVolume;
-		console.log(myMovie.volume);
-	}
-}
-
-
-//播放廣告影片
-
-//靜音linear-gradient(yellow,red)
 var flag =true;
 function muted(){
     //終止預設行為
@@ -86,49 +96,22 @@ function muted(){
     //終止事件傳導
     event.stopPropagation();
     flag = !flag;
-    myMovie.muted = flag;
+    oneadVideo.muted = flag;
 	if(flag){
-		originVolume=myMovie.volume;
+		originVolume=oneadVideo.volume;
 		console.log('originVolume='+originVolume);
-		myMovie.volume=0;
-        console.log(myMovie.volume);
+		oneadVideo.volume=0;
+        console.log(oneadVideo.volume);
         for(let i =0 ; i <=3 ; i++){
             bar[i].style.background = "linear-gradient(rgb(189, 188, 188),rgb(57, 57, 57))";
         }
 	}else{
-        myMovie.volume = 1;
-        console.log(myMovie.volume);
+        oneadVideo.volume = 1;
+        console.log(oneadVideo.volume);
         for(let i =0 ; i <=3 ; i++){
            bar[i].style.background =" linear-gradient(rgb(94, 255, 0),green)";
        }
     }
-    
-}
-
-//播放&暫停
-    // if(myMovie.ended){
-    //     console.log(11);
-    //     playButton.style.display='block';
-    // }else{
-    playButton.style.display='none';  linkButton.style.display='none';
-    // }
-
-    // myMovie.onended = ()=>{
-    //     playButton.style.display='block';
-    // }
-    myMovie.addEventListener("ended",()=>{
-        playButton.style.display='block';
-        linkButton.style.display='block';
-    })
-
-
-function replayVideo(){
-    //終止預設行為
-    event.preventDefault();
-    //終止事件傳導
-    event.stopPropagation();
-    myMovie.play();
-    playButton.style.display='none';  linkButton.style.display='none';
 }
 
 window.addEventListener('load',init);

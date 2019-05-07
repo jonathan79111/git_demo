@@ -19,6 +19,7 @@
     height: 0px;
     position: relative;
     padding-bottom: 56.25%;
+    /* padding-bottom: 140%; */
     margin: 1em 0px;
     overflow: hidden;
     transform-origin: 0px 0px 0px;
@@ -34,6 +35,7 @@
     position: relative;
     opacity: 0.99;
     transform: translateX(-34%);
+    /* transform: translateX(0%); */
     transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     will-change: transform;
     z-index: 80000;
@@ -43,14 +45,38 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    z-index: 999999994;
+    z-index: 999;
     width: 100%;
     height: 56vw;
+}
+
+#gsplayer #mutedButton{
+    position: absolute;
+    left: 0;
+    bottom:2%;
+    z-index: 9999;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 6%;
+    height: 3%;
+    border-radius: 5px;
+    background-color: rgba(157, 157, 157, 0.5);
+    transform: rotate(180deg);
+}
+
+#gsplayer #mutedButton .bar{
+    transition: all .2s;
+    width: 18%;
+    height: 10%;
+    background:linear-gradient(#bdbcbc,#393939);
+    opacity: .8;
 }
 
 #banner_wrapper{
     transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     transform: scale(0.396094);
+    /* transform: scale(0.585938) translateY(358px); */
     transform-origin: right top;
     position: absolute;
     top: 0px;

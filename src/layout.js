@@ -12,10 +12,11 @@ function myFunction(xml){
     let imgUrl = xmlDoc.getElementsByTagName('imgURL')[0].textContent;
     console.log(imgUrl)
     // oneadVideo.textContent = videoUrl.textContent;
-    window.document.getElementById("oneadVideo").innerHTML = "<source src='"+videoUrl.textContent+"' type='video/mp4'>";
+    var ov = window.document.getElementById("oneadVideo");
+    ov.insertAdjacentHTML('afterbegin',"<source src='"+videoUrl.textContent+"' type='video/mp4'>");
     window.document.getElementById("oneadVideo").poster = defaultUrl.textContent;
-    window.document.getElementById("banner_wrapper").innerHTML = "<iframe src='"+imgUrl.substring(0,imgUrl.length-4)+"/index.html?isipIndex=0'</iframe>";
-
+    var bw = window.document.getElementById("banner_wrapper");
+    bw.insertAdjacentHTML('afterbegin', "<iframe src='"+imgUrl.substring(0,imgUrl.length-4)+"/index.html?isipIndex=0'</iframe>");
 
 }
 
