@@ -1,4 +1,9 @@
-#content img{
+a{
+    width: 100%;
+    height: 100%;
+}
+
+.content img{
     width: 100%;
 }
 
@@ -39,6 +44,21 @@
     transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0s;
     will-change: transform;
     z-index: 80000;
+}
+
+#gsplayer #play-button{
+    width: 10%;
+    height: 14%;
+    cursor: pointer;
+    left: 45.31%;
+    top: 43.05%;
+    position: absolute;
+    z-index: 999999996;
+}
+
+#gsplayer #play-button img{
+    width: 100%;
+    height: 100%;
 }
 
 #gsplayer video{
