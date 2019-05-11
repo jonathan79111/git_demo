@@ -1,7 +1,6 @@
 var oneadVideo = document.getElementById('oneadVideo');
 var mutedButton= document.getElementById('mutedButton');
 var bar = document.querySelectorAll(".bar");
-var onead = document.getElementById("div-onead-ad");
 var playBtn = document.getElementById('play-button');
 var windosHeight = window.innerHeight;//抓視窗的高
 var oc = document.getElementById("onead_container");//宣告
@@ -10,7 +9,6 @@ var gsPlayer = document.getElementById('gsplayer');
 var bannerWarrper = document.getElementById('banner_wrapper');
 var bbTop=oc.offsetTop;//抓物件的位子
 var all=0;//宣告一個全域變數
-
 // window.onscroll = someFunction; //也可以寫成 window.onscroll=()=>{} 箭頭函數X
 
 console.log("video.ended:",Boolean(oneadVideo.ended));
@@ -49,14 +47,6 @@ window.addEventListener("scroll", function (e) {
     })
 
 //影片自次播放
-
-
-//點擊banner_warp跳到宣傳頁面
-//點擊跳至連結
-onead.addEventListener("click", function (e) {
-    window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
-    console.log('opennews')
-});
 
 
 //滑動結束後再次點開影片事件

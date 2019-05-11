@@ -38,7 +38,7 @@ window.addEventListener("scroll", (e) => {
 
     bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
 
-    window.removeEventListener("scroll", someFunction)
+    // window.removeEventListener("scroll", someFunction)
   }
 });
 

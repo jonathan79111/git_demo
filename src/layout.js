@@ -1,3 +1,5 @@
+var onead = document.getElementById("div-onead-ad");
+
 function myFunction(xml){
     // var oneadVideo = document.getElementById("oneadVideo");
 
@@ -14,6 +16,7 @@ function myFunction(xml){
 
     // var clickUrl = xmlDoc.getElementsByTagName('clickURL')[0].textContent;
     // oneadVideo.textContent = videoUrl.textContent;
+    // console.log('clickurl',clickUrl);
     var ov = window.document.getElementById("oneadVideo");
     ov.insertAdjacentHTML('afterbegin',"<source src='"+videoUrl.textContent+"' type='video/mp4'>");
     window.document.getElementById("oneadVideo").poster = defaultUrl.textContent;
@@ -40,3 +43,12 @@ xhr.open('get','https://demo.onead.com.tw/cprp/xml/1121984/l.xml?pid=1121984&cam
 console.log('something here')
 xhr.addEventListener("load", myFunction);
 xhr.send(null);
+
+
+//點擊banner_warp跳到宣傳頁面
+//點擊跳至連結
+onead.onclick=()=> {
+    window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
+    console.log('opennews')
+};
+
