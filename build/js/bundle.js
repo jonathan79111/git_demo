@@ -1,4 +1,4 @@
-/*! mirt_test - v1.0.0 - 2019-05-10 */function myFunction(xml){
+/*! mirt_test - v1.0.0 - 2019-05-11 */function myFunction(xml){
     // var oneadVideo = document.getElementById("oneadVideo");
 
     console.log("video:",oneadVideo);
@@ -83,7 +83,7 @@ function someFunction() {
         // bannerWarrper transform:scale(0.396094)->transform: scale(0.585938) translateY(358px);
         bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
         //取消寫在這下面
-        window.removeEventListener("scroll",someFunction)
+        // window.removeEventListener("scroll",someFunction)
     }
 }
 

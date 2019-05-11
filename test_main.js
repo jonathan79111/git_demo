@@ -10,6 +10,7 @@ var gsPlayer = document.getElementById('gsplayer');
 var bannerWarrper = document.getElementById('banner_wrapper');
 var bbTop=oc.offsetTop;//抓物件的位子
 var all=0;//宣告一個全域變數
+
 // window.onscroll = someFunction; //也可以寫成 window.onscroll=()=>{} 箭頭函數X
 
 console.log("video.ended:",Boolean(oneadVideo.ended));
