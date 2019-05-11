@@ -1,15 +1,15 @@
-let oneadVideo = document.getElementById('oneadVideo');
-let mutedButton= document.getElementById('mutedButton');
-let bar= document.querySelectorAll(".bar");
-let onead = document.getElementById("div-onead-ad");
-let playBtn = document.getElementById('play-button');
-let windosHeight = window.innerHeight;
-let oc = document.getElementById("onead_container");
-let inreadLayout = document.getElementById("inread_layout");
-let gsPlayer = document.getElementById('gsplayer');
-let bannerWarrper = document.getElementById('banner_wrapper');
-let bbTop=oc.offsetTop;
-let all=0;
+let oneadVideo:HTMLElement = document.getElementById('oneadVideo');
+let mutedButton:HTMLElement= document.getElementById('mutedButton');
+let bar:NodeListOf<Element>= document.querySelectorAll(".bar");
+let onead:HTMLElement = document.getElementById("div-onead-ad");
+let playBtn:HTMLElement = document.getElementById('play-button');
+let windosHeight:number = window.innerHeight;
+let oc:HTMLElement = document.getElementById("onead_container");
+let inreadLayout:HTMLElement = document.getElementById("inread_layout");
+let gsPlayer:HTMLElement = document.getElementById('gsplayer');
+let bannerWarrper:HTMLElement = document.getElementById('banner_wrapper');
+let bbTop:number = oc.offsetTop;
+let all:number=0;
 
 // let bar = document.querySelectorAll<SVGRectElement | SVGCircleElement>('.bar');
 
@@ -114,5 +114,4 @@ window.addEventListener("load", (e) => {
       }
     }, 200)
   });
-
 
