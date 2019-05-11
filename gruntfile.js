@@ -42,8 +42,10 @@ module.exports = function(grunt) {
             bsFiles: {
                 src : '/index.html'
             },
+            //browserSync監聽watchTask
             options: {
-                proxy: "local.dev"
+                watchTask: true,
+                server: './'
             }
         }
     },
@@ -133,13 +135,13 @@ module.exports = function(grunt) {
 
     // 載入可以提供 uglify task 的 plugin
     grunt.loadNpmTasks('grunt-contrib-watch');
-    // grunt.loadNpmTasks('grunt-browser-sync');
+    grunt.loadNpmTasks('grunt-browser-sync');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // 預設的 task
-    // grunt.registerTask('default',['concat','uglify','cssmin','browserSync','watch']);
-    grunt.registerTask('default',['concat','uglify','cssmin','watch']);
+    grunt.registerTask('default',['concat','uglify','cssmin','browserSync','watch']);
+  //  grunt.registerTask('default',['concat','uglify','cssmin','watch']);
 
   };

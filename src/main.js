@@ -41,7 +41,7 @@ function someFunction() {
         // bannerWarrper transform:scale(0.396094)->transform: scale(0.585938) translateY(358px);
         bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
         //取消寫在這下面
-        window.removeEventListener("scroll",someFunction)
+        // window.removeEventListener("scroll",someFunction)
     }
 }
 
@@ -82,6 +82,7 @@ function playVideo(){
    else{
     console.log('play2')
        oneadVideo.play();
+    //    oneadVideo.volume = 1;
        playBtn.style.display = "none";
        inreadLayout.style.paddingBottom = "140%";
        gsPlayer.style.transform = "translateX(0%)";
@@ -106,13 +107,13 @@ function muted(){
 		console.log('originVolume=',originVolume);
 		oneadVideo.volume=0;
         console.log(oneadVideo.volume);
-        for(let i =0 ; i <=3 ; i++){
+        for(var i =0 ; i <=3 ; i++){
             bar[i].style.background = "linear-gradient(rgb(189, 188, 188),rgb(57, 57, 57))";
         }
 	}else{
         oneadVideo.volume = 1;
         console.log(oneadVideo.volume);
-        for(let i =0 ; i <=3 ; i++){
+        for(var i =0 ; i <=3 ; i++){
            bar[i].style.background =" linear-gradient(rgb(94, 255, 0),green)";
        }
     }
@@ -123,11 +124,10 @@ function muted(){
 function init(){
     oneadVideo.volume =0;
     //先跟HTML畫面產生關連
-    // mutedButton.onclick = muted;
     var time ;
     time = setInterval(()=>{
-        for(let i =0 ; i <=3 ; i++){
-            let num = Math.ceil(Math.random()*15);
+        for(var i =0 ; i <=3 ; i++){
+            var num = Math.ceil(Math.random()*15);
             // console.log(num);
             bar[i].style.height = num+"px";
         }
