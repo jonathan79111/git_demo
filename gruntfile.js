@@ -3,39 +3,51 @@ module.exports = function(grunt) {
     // 專案設定
     grunt.initConfig({
       pkg: grunt.file.readJSON('package.json'),
-
-      watch:{
+    //   banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+    //   '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+    //   '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+    //   '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+    //   ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+    watch:{
         build:{
             files:['/src/*.js','/css/*.css'],
-            tasks:['jshint','csslint','concat','cssmin','uglify'],
+            tasks:['concat','cssmin','uglify','browserSync','cssmin','ts'],
             options:{spawn:false}
         },
+        desktop: {
+            files: ['scripts/lib/Util.ts', '/index.html'],
+            tasks: ['ts:desktop']
+          },
+          mobile: {
+            files: ['src/main.ts', '/index.html'],
+            tasks: ['ts:mobile']
+          }
         /* 监控文件变化并执行相应任务 */
-        img: {
-            files: ['img/*.{png,jpg,jpeg}'],
-            options: {
-                livereload: true
-            }
-        },
-        css: {
-            options: {
-                event: ['changed', 'added'],
-                livereload: true
-            },
-            files: ['css/*.css']
-        },
-        js: {
-            options: {
-                livereload: true
-            },
-            files: ['js/*.js']
-        },
-        html: {
-            options: {
-                livereload: true
-            },
-            files: ['html/*.html']
-        }
+        // img: {
+        //     files: ['img/*.{png,jpg,jpeg}'],
+        //     options: {
+        //         livereload: true
+        //     }
+        // },
+        // css: {
+        //     options: {
+        //         event: ['changed', 'added'],
+        //         livereload: true
+        //     },
+        //     files: ['css/*.css']
+        // },
+        // js: {
+        //     options: {
+        //         livereload: true
+        //     },
+        //     files: ['js/*.js']
+        // },
+        // html: {
+        //     options: {
+        //         livereload: true
+        //     },
+        //     files: ['html/*.html']
+        // }
     },
     browserSync: {
         dev: {
@@ -45,10 +57,31 @@ module.exports = function(grunt) {
             //browserSync監聽watchTask
             options: {
                 watchTask: true,
+                port: 3000,
                 server: './'
             }
-        }
+        },
+        // index:{
+        //     bsFiles: {
+        //         src:  '/index.html'
+        //       },
+        //       options: {
+        //         watchTask: true,
+        //         port: 3000,
+        //         server: './'
+        //       }
+        // }
     },
+    ts: {
+        desktop: {
+            src: ['src/main.ts'],
+            out: 'build/js/player-dw.js'
+          },
+        mobile: {
+            src: ['src/layout.ts'],
+            out: 'build/js/player-mw.js'
+          },
+      },
     concat:{
         options:{
             //文件内容的分隔符
@@ -60,10 +93,14 @@ module.exports = function(grunt) {
         //     src: ['css/*.css'],
         //     dest: 'build/css/common.css'
         // },
-        js:{
-            src: ['src/*.js'],
-            dest: 'build/js/bundle.js'
-        }
+        exportModuleDsktop: {
+            src: ['src/layout.js', 'src/main.js'],
+            dest: 'build/js/concat_test.js'
+        },
+        // js:{
+        //     src: ['src/*.js'],
+        //     dest: 'build/js/bundle.js'
+        // }
     },
     uglify:{
         options:{
@@ -73,31 +110,65 @@ module.exports = function(grunt) {
             banner :'/*! <%=pkg.name%>-<%=pkg.version%>.js <%= grunt.template.today("yyyy-mm-dd") %> */\n',
             footer:'\n/*!修改于<%= grunt.template.today("yyyy-mm-dd") %>  */'
         },
-        combine: {
+        desktop: {
+            options: {
+              // banner: "/*\n    " +  git_version + "\n    GuoShi Partners Co., Ltd. All Rights Reserved. */\n",
+              banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %> */\n',
+              compress: {
+                drop_console: true
+              }
+            },
             files: {
-                'build/js/compress-<%= pkg.name %>-<%= pkg.version %>.min.js': ['js/*.js'],
-                // 'build/js/compress.common.min.js': ['dev/static/js/*/*.common.js']
+              'build/js/player-dw.min.js': ['build/js/player-dw.js']
+            }
+          },
+          mobile: {
+            options: {
+              // banner: "/*\n    " +  git_version + "\n    GuoShi Partners Co., Ltd. All Rights Reserved. */\n",
+              banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %> */\n',
+              compress: {
+                drop_console: true
+              }
             }
         },
-        compress:{
-            options:{
-                report:"min",
-                sourceMap: false,
-                stripBanners: true,
-                //压缩后的文件注释信息
-                banner :'/*! <%=pkg.name%>-<%=pkg.version%>.js <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-                footer:'\n/*!修改于<%= grunt.template.today("yyyy-mm-dd") %>  */'
-            },
-            files:[
-                {
-                    expand:true,
-                    cwd:'dev/static/js',
-                    src:['*.js','!*.min.js','!*.js'],
-                    dest:'build/js',
-                    ext:'.min.js'
-                }
-            ]
-        }
+        //     files: {
+        //       'build/player-mw.min.js': ['build/player-mw.js']
+        //     }
+        //   }
+        // combine: {
+        //     files: {
+        //         'build/js/compress-<%= pkg.name %>-<%= pkg.version %>.min.js': ['js/*.js'],
+        //         // 'build/js/compress.common.min.js': ['dev/static/js/*/*.common.js']
+        //         compress:{
+        //             options:{
+        //                 report:"min",
+        //                 sourceMap: false,
+        //                 stripBanners: true,
+        //                 //压缩后的文件注释信息
+        //                 banner :'/*! <%=pkg.name%>-<%=pkg.version%>.js <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        //                 footer:'\n/*!修改于<%= grunt.template.today("yyyy-mm-dd") %>  */'
+        //             }
+        //     }
+        // },
+        // // compress:{
+        // //     options:{
+        // //         report:"min",
+        // //         sourceMap: false,
+        // //         stripBanners: true,
+        // //         //压缩后的文件注释信息
+        // //         banner :'/*! <%=pkg.name%>-<%=pkg.version%>.js <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        // //         footer:'\n/*!修改于<%= grunt.template.today("yyyy-mm-dd") %>  */'
+        // //     },
+        //     files:[
+        //         {
+        //             expand:true,
+        //             cwd:'dev/static/js',
+        //             src:['*.js','!*.min.js','!*.js'],
+        //             dest:'build/js',
+        //             ext:'.min.js'
+        //         }
+        //     ]
+        // }
     },
     cssmin: {
         combine: {
@@ -139,9 +210,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-
+    grunt.loadNpmTasks("grunt-ts");
     // 預設的 task
-    grunt.registerTask('default',['concat','uglify','cssmin','browserSync','watch']);
+    // grunt.registerTask('default',['concat','uglify','cssmin','ts:desktop','browserSync','watch']);
   //  grunt.registerTask('default',['concat','uglify','cssmin','watch']);
-
+//   grunt.registerTask('default', ['browserSync','watch','concat','uglify','cssmin','ts']);//可以啟動browser重整成功
+  grunt.registerTask('default', ['browserSync','concat','uglify','cssmin','ts','watch']);//browser會啟動,但重整後失敗
+  grunt.registerTask('desktop', ['uglify:desktop','uglify:desktop','concat:exportModuleDsktop']);
+  grunt.registerTask('mobile', ['ts:mobile'],['uglify:mobile']);
   };

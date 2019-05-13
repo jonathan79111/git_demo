@@ -1,7 +1,8 @@
-let oneadVideo:HTMLElement = document.getElementById('oneadVideo');
+// / <reference path="../mobile/scripts/lib/Util.ts" />
+let oneadVideo:HTMLMediaElement= (<HTMLMediaElement>document.getElementById('oneadVideo'));
 let mutedButton:HTMLElement= document.getElementById('mutedButton');
-let bar:NodeListOf<Element>= document.querySelectorAll(".bar");
-let onead:HTMLElement = document.getElementById("div-onead-ad");
+let bar= document.querySelectorAll(".bar")  as NodeListOf<HTMLElement>;;
+// let onead:HTMLElement = document.getElementById("div-onead-ad");
 let playBtn:HTMLElement = document.getElementById('play-button');
 let windosHeight:number = window.innerHeight;
 let oc:HTMLElement = document.getElementById("onead_container");
@@ -37,7 +38,6 @@ window.addEventListener("scroll", (e) => {
     gsPlayer.style.transform = "translateX(0%)";
 
     bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
-
     // window.removeEventListener("scroll", someFunction)
   }
 });
@@ -54,7 +54,7 @@ window.addEventListener("scroll", (e) => {
 
 //點擊banner_warp跳到宣傳頁面
 //點擊跳至連結
-onead.addEventListener("click", () => {
+bannerWarrper.addEventListener("click", () => {
     window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
     console.log('opennews')
   });
@@ -90,13 +90,13 @@ mutedButton.addEventListener("click", (e) => {
   oneadVideo.muted = Mute;
   if (Mute) {
     // originVolume = oneadVideo.volume;
-    oneadVideo.volume = 0;
+    this.volume = 0;
     for (let i = 0; i <= 3; i++) {
       bar[i].style.background = "linear-gradient(rgb(189, 188, 188),rgb(57, 57, 57))";
     }
   } else {
-    oneadVideo.volume = 1;
-    console.log(oneadVideo.volume);
+    this.volume = 1;
+    console.log(this.volume);
     for (let i = 0; i <= 3; i++) {
         bar[i].style.background = " linear-gradient(rgb(94, 255, 0),green)";
     }
@@ -105,7 +105,7 @@ mutedButton.addEventListener("click", (e) => {
 
 //各個事件load到頁面
 window.addEventListener("load", (e) => {
-    oneadVideo.volume = 0;
+this.volume = 0;
     let time;
     time = setInterval(() => {
       for (let i = 0; i <= 3; i++) {
