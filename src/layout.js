@@ -1,3 +1,4 @@
+//@ts-check
 var onead = document.getElementById("div-onead-ad");
 
 function myFunction(xml){
