@@ -5,7 +5,8 @@ function myFunction(xml) {
     let imgUrl = xmlDoc.getElementsByTagName('imgURL')[0].textContent;
     let ov = window.document.getElementById("oneadVideo");
     ov.insertAdjacentHTML('afterbegin', "<source src='" + videoUrl.textContent + "' type='video/mp4'>");
-    window.document.getElementById("oneadVideo").poster = defaultUrl.textContent;
+    ov.setAttribute("poster",defaultUrl.textContent);
+    // window.document.getElementById("oneadVideo").poster = defaultUrl.textContent;
     let bw = window.document.getElementById("banner_wrapper");
     bw.insertAdjacentHTML('afterbegin', "<iframe src='" + imgUrl.substring(0, imgUrl.length - 4) + "/index.html?isipIndex=0'</iframe>" + "</a>");
     let onead = document.getElementById('div-onead-ad');
