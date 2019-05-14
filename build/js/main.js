@@ -12,29 +12,25 @@ var gsPlayer = document.getElementById('gsplayer');
 var bannerWarrper = document.getElementById('banner_wrapper');
 var bbTop = oc.offsetTop;
 var all = 0;
-var Open = false;
-Open = false;
-var scrolling = function () { return window.addEventListener("scroll", function (e) {
+var scrolling = false;
+window.addEventListener("scroll", function (e) {
     var windowtop = window.scrollY;
     all = windowtop + windosHeight;
-    if (all >= bbTop && all <= 1700) {
-        console.log('move');
+    if (all >= bbTop && all <= 1700 && !scrolling) {
         playBtn.style.display = "block";
         inreadLayout.style.paddingBottom = "56.2%";
         gsPlayer.style.transform = "translateX(-34%)";
         bannerWarrper.style.transform = "scale(0.396094)";
-        Open = true;
+        scrolling = true;
     }
-    else if (Open) {
-        console.log('not move');
+    else if (scrolling) {
         oneadVideo.play();
         playBtn.style.display = "none";
         inreadLayout.style.paddingBottom = "140%";
         gsPlayer.style.transform = "translateX(0%)";
         bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
-        window.removeEventListener("scroll", scrolling);
     }
-}); };
+});
 oneadVideo.addEventListener("ended", function () {
     playBtn.style.display = "block";
     inreadLayout.style.paddingBottom = "56.2%";
@@ -42,7 +38,6 @@ oneadVideo.addEventListener("ended", function () {
     bannerWarrper.style.transform = "scale(0.396094)";
 });
 bannerClickArea.addEventListener("click", function () {
-    console.log('link');
     window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
     console.log('opennews');
 });
@@ -57,7 +52,6 @@ oneadVideo.addEventListener("click", function (e) {
         bannerWarrper.style.transform = "scale(0.396094)";
     }
     else {
-        console.log('play');
         oneadVideo.play();
         playBtn.style.display = "none";
         inreadLayout.style.paddingBottom = "140%";
@@ -65,14 +59,13 @@ oneadVideo.addEventListener("click", function (e) {
         bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
     }
 });
-var Mute = false;
-Mute = false;
+var mute = false;
 mutedButton.addEventListener("click", function (e) {
     e.preventDefault();
     e.stopPropagation();
-    Mute = !Mute;
-    oneadVideo.muted = Mute;
-    if (Mute) {
+    mute = !mute;
+    oneadVideo.muted = mute;
+    if (mute) {
         _this.volume = 0;
         for (var i = 0; i <= 3; i++) {
             bar[i].style.background = "linear-gradient(rgb(189, 188, 188),rgb(57, 57, 57))";

@@ -1,7 +1,6 @@
 let oneadVideo:HTMLMediaElement= (<HTMLMediaElement>document.getElementById('oneadVideo'));
 let mutedButton:HTMLElement= document.getElementById('mutedButton');
 let bar= document.querySelectorAll(".bar")  as NodeListOf<HTMLElement>;;
-// let onead:HTMLElement = document.getElementById("div-onead-ad");
 let bannerClickArea:HTMLElement = document.getElementById('banner_click_area');
 let playBtn:HTMLElement = document.getElementById('play-button');
 let windosHeight:number = window.innerHeight;
@@ -11,25 +10,24 @@ let gsPlayer:HTMLElement = document.getElementById('gsplayer');
 let bannerWarrper:HTMLElement = document.getElementById('banner_wrapper');
 let bbTop:number = oc.offsetTop;
 let all:number=0;
-
+// let onead:HTMLElement = document.getElementById("div-onead-ad");
 // let bar = document.querySelectorAll<SVGRectElement | SVGCircleElement>('.bar');
 
 
 //滑動到廣告去展開影片效果
-let Open:boolean = false;//初始宣告型別
-Open = false;
-let scrolling = () => window.addEventListener("scroll", (e) => {
-// window.addEventListener("scroll", (e) => {
+let scrolling:boolean = false;//初始宣告型別
+// let scrolling = () => window.addEventListener("scroll", (e) => {
+window.addEventListener("scroll", (e) => {
   let windowtop = window.scrollY;
   all = windowtop + windosHeight;
-  if (all >= bbTop && all <= 1700) {
+  if (all >= bbTop && all <= 1700 && !scrolling) {
     playBtn.style.display = "block";
     inreadLayout.style.paddingBottom = "56.2%";
     gsPlayer.style.transform = "translateX(-34%)";
     bannerWarrper.style.transform = "scale(0.396094)";
-    Open = true;
+    scrolling = true;
   }
-  else if (Open) {
+  else if (scrolling) {
     oneadVideo.play();
 
     playBtn.style.display = "none";
@@ -39,7 +37,7 @@ let scrolling = () => window.addEventListener("scroll", (e) => {
     gsPlayer.style.transform = "translateX(0%)";
 
     bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
-    window.removeEventListener("scroll",scrolling)
+    // window.removeEventListener("scroll",scrolling)
   }
 });
 
@@ -82,14 +80,13 @@ oneadVideo.addEventListener("click", (e) => {
 
 
 //調整靜音
-let Mute:boolean = false;//初始宣告型別
-Mute = false;
+let mute:boolean = false;//初始宣告型別
 mutedButton.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
-  Mute = !Mute;
-  oneadVideo.muted = Mute;
-  if (Mute) {
+  mute = !mute;
+  oneadVideo.muted = mute;
+  if (mute) {
     // originVolume = oneadVideo.volume;
     this.volume = 0;
     for (let i = 0; i <= 3; i++) {
@@ -114,5 +111,6 @@ this.volume = 0;
         bar[i].style.height = num + "px";
       }
     }, 200)
+      // scrolling();
   });
 

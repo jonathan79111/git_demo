@@ -18,17 +18,19 @@ console.log("video.ended:",Boolean(oneadVideo.ended));
 
 //滑動到廣告去展開影片效果
 var open = false;
-let scrolling = () =>window.addEventListener("scroll", (e) => {
+window.addEventListener("scroll", (e) => {
   let windowtop = window.scrollY;
   all = windowtop + windosHeight;
-  if (all >= bbTop && all <= 1700) {
+  if (all >= bbTop && all <= 1700 && !open) {
+    console.log('scroll back')
     playBtn.style.display = "block";
     inreadLayout.style.paddingBottom = "56.2%";
     gsPlayer.style.transform = "translateX(-34%)";
     bannerWarrper.style.transform = "scale(0.396094)";
-    Open = true;
+    open = true;
   }
-  else if (Open) {
+  else if (open) {
+      console.log('scroll out')
     oneadVideo.play();
 
     playBtn.style.display = "none";
@@ -38,7 +40,7 @@ let scrolling = () =>window.addEventListener("scroll", (e) => {
     gsPlayer.style.transform = "translateX(0%)";
 
     bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
-    window.removeEventListener("scroll",scrolling)
+    // window.removeEventListener("scroll",scrolling)
   }
 });
 
@@ -121,6 +123,7 @@ function muted(){
 function init(){
     oneadVideo.volume =0;
     //先跟HTML畫面產生關連
+    console.log('start')
     var time ;
     time = setInterval(()=>{
         for(var i =0 ; i <=3 ; i++){
