@@ -10,6 +10,7 @@ var gsPlayer = document.getElementById('gsplayer');
 var bannerWarrper = document.getElementById('banner_wrapper');
 var bbTop=oc.offsetTop;//抓物件的位子
 var all=0;//宣告一個全域變數
+// let bannerClickArea = document.getElementById('banner_click_area');
 // window.onscroll = someFunction; //也可以寫成 window.onscroll=()=>{} 箭頭函數X
 
 console.log("video.ended:",Boolean(oneadVideo.ended));
@@ -17,33 +18,30 @@ console.log("video.ended:",Boolean(oneadVideo.ended));
 
 //滑動到廣告去展開影片效果
 var open = false;
-function someFunction() {
-    var windowtop =window.scrollY;//宣告卷軸的高度
-     all = windowtop+windosHeight//卷軸滑動高度+一開始視窗高度 就是當前卷軸的高度
-    // toptext.innerText=all;//帶入高度
-    if(all >= bbTop&&all<= 1700){//如果總高度>=物件高 AND 總高度<=2000的時候 走這裡
-        playBtn.style.display = "block";
-        inreadLayout.style.paddingBottom = "56.2%";
-        gsPlayer.style.transform = "translateX(-34%)";
-        bannerWarrper.style.transform = "scale(0.396094)";
-        open = true;
-        // console.log("動1")
-    }
-    else if(open){//如果不是上面就是這裡
-        // console.log("動2")
-        oneadVideo.play();
+let scrolling = () =>window.addEventListener("scroll", (e) => {
+  let windowtop = window.scrollY;
+  all = windowtop + windosHeight;
+  if (all >= bbTop && all <= 1700) {
+    playBtn.style.display = "block";
+    inreadLayout.style.paddingBottom = "56.2%";
+    gsPlayer.style.transform = "translateX(-34%)";
+    bannerWarrper.style.transform = "scale(0.396094)";
+    Open = true;
+  }
+  else if (Open) {
+    oneadVideo.play();
 
-        playBtn.style.display = "none";
-        // inread_layout padding-bottom 56.25% ->140%
-        inreadLayout.style.paddingBottom = "140%";
-        // gsplayer transform(-34%)->transform(0%)
-        gsPlayer.style.transform = "translateX(0%)";
-        // bannerWarrper transform:scale(0.396094)->transform: scale(0.585938) translateY(358px);
-        bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
-        //取消寫在這下面
-        // window.removeEventListener("scroll",someFunction)
-    }
-}
+    playBtn.style.display = "none";
+
+    inreadLayout.style.paddingBottom = "140%";
+
+    gsPlayer.style.transform = "translateX(0%)";
+
+    bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
+    window.removeEventListener("scroll",scrolling)
+  }
+});
+
 
 
 //影片結束回到初始位置
@@ -59,11 +57,10 @@ function someFunction() {
 
 //點擊banner_warp跳到宣傳頁面
 //點擊跳至連結
-function linkNews(e){
+bannerWarrper.addEventListener("click", () => {
     window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
     console.log('opennews')
-}
-
+  });
 
 //滑動結束後再次點開影片事件
 function playVideo(){
@@ -133,10 +130,9 @@ function init(){
         }
     },200)
     //再建事件聆聽的功能
-    onead.addEventListener('click',linkNews);
     gsPlayer.addEventListener('click',playVideo)
     mutedButton.addEventListener('click',muted);
-    window.addEventListener('scroll', someFunction);
+    // window.addEventListener('scroll', someFunction);
     // playButton.addEventListener('scroll',scrollPlay);
 }
 
