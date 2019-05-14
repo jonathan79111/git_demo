@@ -8,7 +8,6 @@ function myFunction(xml) {
     ov.setAttribute("poster", defaultUrl.textContent);
     var bw = window.document.getElementById("banner_wrapper");
     bw.insertAdjacentHTML('afterbegin', "<iframe src='" + imgUrl.substring(0, imgUrl.length - 4) + "/index.html?isipIndex=0'</iframe>" + "</a>");
-    var onead = document.getElementById('div-onead-ad');
 }
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function () {
