@@ -5,7 +5,7 @@ function myFunction(xml) {
     var imgUrl = xmlDoc.getElementsByTagName('imgURL')[0].textContent;
     var ov = window.document.getElementById("oneadVideo");
     ov.insertAdjacentHTML('afterbegin', "<source src='" + videoUrl.textContent + "' type='video/mp4'>");
-    window.document.getElementById("oneadVideo").poster = defaultUrl.textContent;
+    ov.setAttribute("poster", defaultUrl.textContent);
     var bw = window.document.getElementById("banner_wrapper");
     bw.insertAdjacentHTML('afterbegin', "<iframe src='" + imgUrl.substring(0, imgUrl.length - 4) + "/index.html?isipIndex=0'</iframe>" + "</a>");
     var onead = document.getElementById('div-onead-ad');
@@ -23,4 +23,4 @@ xhr.open('get', 'https://demo.onead.com.tw/cprp/xml/1121984/l.xml?pid=1121984&ca
 console.log('something here');
 xhr.addEventListener("load", myFunction);
 xhr.send(null);
-//# sourceMappingURL=player-mw.js.map
+//# sourceMappingURL=layout.js.map

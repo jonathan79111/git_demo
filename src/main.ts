@@ -1,4 +1,3 @@
-// / <reference path="../mobile/scripts/lib/Util.ts" />
 let oneadVideo:HTMLMediaElement= (<HTMLMediaElement>document.getElementById('oneadVideo'));
 let mutedButton:HTMLElement= document.getElementById('mutedButton');
 let bar= document.querySelectorAll(".bar")  as NodeListOf<HTMLElement>;;
@@ -18,6 +17,7 @@ let all:number=0;
 //滑動到廣告去展開影片效果
 let Open:boolean = false;//初始宣告型別
 Open = false;
+// let scrolling = () => window.addEventListener("scroll", (e) => {
 window.addEventListener("scroll", (e) => {
   let windowtop = window.scrollY;
   all = windowtop + windosHeight;
@@ -38,7 +38,7 @@ window.addEventListener("scroll", (e) => {
     gsPlayer.style.transform = "translateX(0%)";
 
     bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
-    // window.removeEventListener("scroll", someFunction)
+    // window.removeEventListener("scroll",scrolling)
   }
 });
 

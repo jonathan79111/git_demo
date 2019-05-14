@@ -75,11 +75,11 @@ module.exports = function(grunt) {
     ts: {
         desktop: {
             src: ['src/main.ts'],
-            out: 'build/js/player-dw.js'
+            out: 'build/js/main.js'
           },
         mobile: {
             src: ['src/layout.ts'],
-            out: 'build/js/player-mw.js'
+            out: 'build/js/layout.js'
           },
       },
     concat:{
@@ -89,13 +89,17 @@ module.exports = function(grunt) {
             stripBanners: true,
             banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */'
         },
+        // concatAll: {
+        //     src: ['src/layout.ts', 'src/main.ts'],
+        //     dest: 'build/js/comman.ts'
+        // },
         // css:{
         //     src: ['css/*.css'],
-        //     dest: 'build/css/common.css'
+        //     dest: 'build/css/common.css'0
         // },
         exportModuleDsktop: {
-            src: ['src/layout.js', 'src/main.js'],
-            dest: 'build/js/concat_test.js'
+            src: ['build/js/layout.js', 'build/js/main.js'],
+            dest: 'build/js/comman.js'
         },
         // js:{
         //     src: ['src/*.js'],
@@ -119,7 +123,7 @@ module.exports = function(grunt) {
               }
             },
             files: {
-              'build/js/player-dw.min.js': ['build/js/player-dw.js']
+              'build/js/comman.min.js': ['build/js/comman.js']
             }
           },
           mobile: {
@@ -132,7 +136,7 @@ module.exports = function(grunt) {
             }
         },
         //     files: {
-        //       'build/player-mw.min.js': ['build/player-mw.js']
+        //       'build/layout.min.js': ['build/layout.js']
         //     }
         //   }
         // combine: {
