@@ -1,4 +1,4 @@
-/*! mirt_test - v1.0.0 - 2019-05-14 */function myFunction(xml) {
+/*! mirt_test - v1.0.0 - 2019-05-15 */function myFunction(xml) {
     var xmlDoc = xml.responseXML;
     var videoUrl = xmlDoc.getElementsByTagName('videoURL_mp4')[0];
     var defaultUrl = xmlDoc.getElementsByTagName('defaultURL')[0];
@@ -8,7 +8,6 @@
     ov.setAttribute("poster", defaultUrl.textContent);
     var bw = window.document.getElementById("banner_wrapper");
     bw.insertAdjacentHTML('afterbegin', "<iframe src='" + imgUrl.substring(0, imgUrl.length - 4) + "/index.html?isipIndex=0'</iframe>" + "</a>");
-    var onead = document.getElementById('div-onead-ad');
 }
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function () {
@@ -28,6 +27,7 @@ var oneadVideo = document.getElementById('oneadVideo');
 var mutedButton = document.getElementById('mutedButton');
 var bar = document.querySelectorAll(".bar");
 ;
+var bannerClickArea = document.getElementById('banner_click_area');
 var playBtn = document.getElementById('play-button');
 var windosHeight = window.innerHeight;
 var oc = document.getElementById("onead_container");
@@ -36,19 +36,18 @@ var gsPlayer = document.getElementById('gsplayer');
 var bannerWarrper = document.getElementById('banner_wrapper');
 var bbTop = oc.offsetTop;
 var all = 0;
-var Open = false;
-Open = false;
+var scrolling = false;
 window.addEventListener("scroll", function (e) {
     var windowtop = window.scrollY;
     all = windowtop + windosHeight;
-    if (all >= bbTop && all <= 1700) {
+    if (all >= bbTop && all <= 1700 && !open) {
         playBtn.style.display = "block";
         inreadLayout.style.paddingBottom = "56.2%";
         gsPlayer.style.transform = "translateX(-34%)";
         bannerWarrper.style.transform = "scale(0.396094)";
-        Open = true;
+        scrolling = true;
     }
-    else if (Open) {
+    else if (scrolling) {
         oneadVideo.play();
         playBtn.style.display = "none";
         inreadLayout.style.paddingBottom = "140%";
@@ -62,7 +61,7 @@ oneadVideo.addEventListener("ended", function () {
     gsPlayer.style.transform = "translateX(-34%)";
     bannerWarrper.style.transform = "scale(0.396094)";
 });
-bannerWarrper.addEventListener("click", function () {
+bannerClickArea.addEventListener("click", function () {
     window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
     console.log('opennews');
 });
@@ -84,14 +83,13 @@ oneadVideo.addEventListener("click", function (e) {
         bannerWarrper.style.transform = "scale(0.585938) translateY(358px)";
     }
 });
-var Mute = false;
-Mute = false;
+var mute = false;
 mutedButton.addEventListener("click", function (e) {
     e.preventDefault();
     e.stopPropagation();
-    Mute = !Mute;
-    oneadVideo.muted = Mute;
-    if (Mute) {
+    mute = !mute;
+    oneadVideo.muted = mute;
+    if (mute) {
         _this.volume = 0;
         for (var i = 0; i <= 3; i++) {
             bar[i].style.background = "linear-gradient(rgb(189, 188, 188),rgb(57, 57, 57))";
