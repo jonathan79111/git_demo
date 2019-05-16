@@ -3,7 +3,6 @@ var oneadVideo = document.getElementById('oneadVideo');
 var mutedButton = document.getElementById('mutedButton');
 var bar = document.querySelectorAll(".bar");
 ;
-var bannerClickArea = document.getElementById('banner_click_area');
 var playBtn = document.getElementById('play-button');
 var windosHeight = window.innerHeight;
 var oc = document.getElementById("onead_container");
@@ -36,10 +35,6 @@ oneadVideo.addEventListener("ended", function () {
     inreadLayout.style.paddingBottom = "56.2%";
     gsPlayer.style.transform = "translateX(-34%)";
     bannerWarrper.style.transform = "scale(0.396094)";
-});
-bannerClickArea.addEventListener("click", function () {
-    window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
-    console.log('opennews');
 });
 oneadVideo.addEventListener("click", function (e) {
     e.preventDefault();

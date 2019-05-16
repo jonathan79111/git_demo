@@ -1,7 +1,7 @@
 let oneadVideo:HTMLMediaElement= (<HTMLMediaElement>document.getElementById('oneadVideo'));
 let mutedButton:HTMLElement= document.getElementById('mutedButton');
 let bar= document.querySelectorAll(".bar")  as NodeListOf<HTMLElement>;;
-let bannerClickArea:HTMLElement = document.getElementById('banner_click_area');
+// let bannerClickArea:HTMLElement = document.getElementById('banner_click_area');
 let playBtn:HTMLElement = document.getElementById('play-button');
 let windosHeight:number = window.innerHeight;
 let oc:HTMLElement = document.getElementById("onead_container");
@@ -53,10 +53,10 @@ window.addEventListener("scroll", (e) => {
 
 //點擊banner_warp跳到宣傳頁面
 //點擊跳至連結
-bannerClickArea.addEventListener("click", () => {
-    window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
-    console.log('opennews')
-  });
+// bannerClickArea.addEventListener("click", () => {
+//     window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
+//     console.log('opennews')
+//   });
 
 //滑動結束後再次點開影片事件
 oneadVideo.addEventListener("click", (e) => {

@@ -12,24 +12,28 @@ var bbTop=oc.offsetTop;//抓物件的位子
 var all=0;//宣告一個全域變數
 // let bannerClickArea = document.getElementById('banner_click_area');
 // window.onscroll = someFunction; //也可以寫成 window.onscroll=()=>{} 箭頭函數X
-
+var iframe = document.getElementById('myFrame');
+var ddd=iframe.contentDocument;
+var help = document.getElementById('help');
+help.innerText = ddd; ;
+// let cc=iframe.contentWindow.document.getElementsByTagName("html")[0];
 console.log("video.ended:",Boolean(oneadVideo.ended));
 
 
 //滑動到廣告去展開影片效果
-var open = false;
+var bbb = false;
 window.addEventListener("scroll", (e) => {
   let windowtop = window.scrollY;
   all = windowtop + windosHeight;
-  if (all >= bbTop && all <= 1700 && !open) {
+  if (all >= bbTop && all <= 1700 && !bbb) {
     console.log('scroll back')
     playBtn.style.display = "block";
     inreadLayout.style.paddingBottom = "56.2%";
     gsPlayer.style.transform = "translateX(-34%)";
     bannerWarrper.style.transform = "scale(0.396094)";
-    open = true;
+    bbb = true;
   }
-  else if (open) {
+  else if (bbb) {
       console.log('scroll out')
     oneadVideo.play();
 
@@ -59,10 +63,24 @@ window.addEventListener("scroll", (e) => {
 
 //點擊banner_warp跳到宣傳頁面
 //點擊跳至連結
-bannerWarrper.addEventListener("click", () => {
-    window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
+
+function linkNews() {
+
+    var elmnt = iframe.contentWindow.document.getElementsByTagName("H1")[0];
+    elmnt.style.display = "none";
+    // window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
     console.log('opennews')
-  });
+  };
+
+//   bannerWarrper.addEventListener("click", () => {
+//           //終止預設行為
+//     event.preventDefault();
+//     //終止事件傳導
+//     event.stopPropagation();
+//     window.open("https://www.facebook.com/applausemovietaiwan/videos/771300709916739");
+//     console.log('opennews')
+//   });
+
 
 //滑動結束後再次點開影片事件
 function playVideo(){
@@ -137,8 +155,8 @@ function init(){
     mutedButton.addEventListener('click',muted);
     // window.addEventListener('scroll', someFunction);
     // playButton.addEventListener('scroll',scrollPlay);
+    gsPlayer.addEventListener("click",linkNews);
 }
 
 
 window.addEventListener('load',init);
-

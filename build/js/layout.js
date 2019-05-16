@@ -1,4 +1,5 @@
 function myFunction(xml) {
+    ;
     var xmlDoc = xml.responseXML;
     var videoUrl = xmlDoc.getElementsByTagName('videoURL_mp4')[0];
     var defaultUrl = xmlDoc.getElementsByTagName('defaultURL')[0];
@@ -7,7 +8,8 @@ function myFunction(xml) {
     ov.insertAdjacentHTML('afterbegin', "<source src='" + videoUrl.textContent + "' type='video/mp4'>");
     ov.setAttribute("poster", defaultUrl.textContent);
     var bw = window.document.getElementById("banner_wrapper");
-    bw.insertAdjacentHTML('afterbegin', "<iframe src='" + imgUrl.substring(0, imgUrl.length - 4) + "/index.html?isipIndex=0'</iframe>" + "</a>");
+    bw.insertAdjacentHTML('afterbegin', "<iframe src='" + imgUrl.substring(0, imgUrl.length - 4) + "/index.html?isipIndex=0'" + "id='myFrame'>" + "</iframe>" + "</a>");
+    console.log(bw);
 }
 var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function () {
@@ -19,7 +21,7 @@ xhr.onreadystatechange = function () {
     }
 };
 xhr.open('get', 'https://demo.onead.com.tw/cprp/xml/1121984/l.xml?pid=1121984&campid=10033&uid=1000081&guid=4262fc5d-60f4-11e9-b1f7-0242ac120004', true);
-console.log('something here');
+console.log('get data');
 xhr.addEventListener("load", myFunction);
 xhr.send(null);
 //# sourceMappingURL=layout.js.map
